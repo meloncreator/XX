@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			.wrap {
+				position: relative;
+				margin: 100px auto;
+				width: 1200px;
+				height: 800px;
+			}
+			
+			#img {
+				position: absolute;
+			}
+			
+			.dam-board {
+				position: absolute;
+				margin: 0;
+				padding: 0;
+				width: 1200px;
+				height: 800px;
+			}
+			
+			.dam-board li {
+				display: inline-block;
+				margin: 0;
+				padding: 0;
+				width: 120px;
+				height: 80px;
+				vertical-align: middle;
+				opacity: 0;
+			}
+			
+			.dam-board .on {
+				opacity: 1;
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<div class="wrap">
+			<div id="img">
+				<img src="img/img4.jpg" />
+			</div>
+			<ul class="dam-board">
+				<li style="background: url(img/img3.jpg) no-repeat 0 0;"></li>
+			</ul>
+		</div>
+	</body>
+
+</html>
+<script type="text/javascript">
+	var oBam = document.getElementsByClassName("dam-board")[0];
+	var minBam = oBam.getElementsByTagName("li");
+		(function() {
+			var str = "";
+			for(var i = 0; i < 10; i++) {
+				for (var j = 0; j < 10; j++) {
+					str += `<li class='on' style='background: url(img/img3.jpg) no-repeat ${j%10*(-120)}px ${i%10*(-80)}px'></li>`;
+				}
+			}
+			oBam.innerHTML = str;
+		})();
+		var half = minBam.length * (0.5);
+		(function() {
+			var oOn = document.getElementsByClassName("on");
+			var allLen = minBam.length;
+			for(var ele in minBam) {
+				minBam[ele].onmouseenter = function() {
+					this.className = "";
+					if(oOn.length <= half) {
+						var all = oOn;
+						for(var ele in minBam) {
+							minBam[ele].className = "";
+						}
+					}
+				}
+			}
+		})();
+</script>
